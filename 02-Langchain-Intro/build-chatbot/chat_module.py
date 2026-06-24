@@ -59,3 +59,12 @@ def user_chat(user_id, user_message):
     return runnable.invoke({'input_prompt': user_message}, config=config)
 
 
+def stream_chat(user_id, user_message):
+
+    config = {
+        "configurable": {"session_id": user_id}
+    }
+
+    for output in runnable.stream({'input_prompt': user_message}, config=config):
+        yield output
+
